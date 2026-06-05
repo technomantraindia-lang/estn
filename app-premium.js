@@ -129,6 +129,41 @@ document.addEventListener("DOMContentLoaded", () => {
         revealItems.forEach((item) => revealObserver.observe(item));
     }
 
+    const tiltScene = document.querySelector("[data-tilt-scene]");
+    const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    if (tiltScene && supportsHover && !reducedMotion) {
+        const resetSceneTilt = () => {
+            tiltScene.style.setProperty("--scene-rotate-x", "0deg");
+            tiltScene.style.setProperty("--scene-rotate-y", "0deg");
+            tiltScene.style.setProperty("--scene-shift-x", "0px");
+            tiltScene.style.setProperty("--scene-shift-y", "0px");
+            tiltScene.style.setProperty("--scene-shift-x-soft", "0px");
+            tiltScene.style.setProperty("--scene-shift-y-soft", "0px");
+        };
+
+        const updateSceneTilt = (event) => {
+            const bounds = tiltScene.getBoundingClientRect();
+            const relativeX = (event.clientX - bounds.left) / bounds.width;
+            const relativeY = (event.clientY - bounds.top) / bounds.height;
+            const rotateY = (relativeX - 0.5) * 12;
+            const rotateX = (0.5 - relativeY) * 10;
+            const shiftX = (relativeX - 0.5) * 18;
+            const shiftY = (relativeY - 0.5) * 16;
+
+            tiltScene.style.setProperty("--scene-rotate-x", `${rotateX}deg`);
+            tiltScene.style.setProperty("--scene-rotate-y", `${rotateY}deg`);
+            tiltScene.style.setProperty("--scene-shift-x", `${shiftX}px`);
+            tiltScene.style.setProperty("--scene-shift-y", `${shiftY}px`);
+            tiltScene.style.setProperty("--scene-shift-x-soft", `${shiftX * 0.48}px`);
+            tiltScene.style.setProperty("--scene-shift-y-soft", `${shiftY * 0.48}px`);
+        };
+
+        resetSceneTilt();
+        tiltScene.addEventListener("pointermove", updateSceneTilt);
+        tiltScene.addEventListener("pointerleave", resetSceneTilt);
+    }
+
     contactForm.addEventListener("submit", (event) => {
         event.preventDefault();
         const submitButton = contactForm.querySelector("button[type='submit']");
