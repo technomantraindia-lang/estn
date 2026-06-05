@@ -141,34 +141,33 @@ p {
 .brand {
     align-items: center;
     display: inline-flex;
-    gap: 13px;
+    gap: 0;
 }
 
 .brand-mark {
-    display: grid;
-    gap: 3px;
-    grid-template-columns: repeat(3, 5px);
-    height: 34px;
-    transform: skew(-12deg);
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    height: 74px;
+    justify-content: center;
+    width: 74px;
 }
 
-.brand-mark span {
-    background: var(--teal-bright);
-    border-radius: 2px;
+.site-header .brand-mark {
+    height: 110px;
+    width: 110px;
 }
 
-.brand-mark span:nth-child(1) {
-    height: 65%;
-    margin-top: auto;
+.site-footer .brand-mark {
+    height: 92px;
+    width: 92px;
 }
 
-.brand-mark span:nth-child(2) {
+.brand-mark img {
+    display: block;
     height: 100%;
-}
-
-.brand-mark span:nth-child(3) {
-    height: 78%;
-    margin-top: auto;
+    object-fit: contain;
+    width: 100%;
 }
 
 .brand-copy {
@@ -1648,12 +1647,30 @@ p {
 }
 
 .reveal {
+    --reveal-transform: translateY(48px);
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .75s var(--ease), transform .75s var(--ease);
+    transform: var(--reveal-transform);
+    transition:
+        opacity .95s var(--ease) var(--reveal-delay, 0ms),
+        transform .95s var(--ease) var(--reveal-delay, 0ms);
 }
 
 .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-animate {
+    --section-transform: translateY(72px);
+    opacity: 0;
+    transform: var(--section-transform);
+    transition:
+        opacity 1.05s var(--ease) var(--section-delay, 0ms),
+        transform 1.05s var(--ease) var(--section-delay, 0ms);
+    will-change: opacity, transform;
+}
+
+.section-animate.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -1777,6 +1794,16 @@ p {
 
     .header-inner {
         height: 76px;
+    }
+
+    .site-header .brand-mark {
+        height: 82px;
+        width: 82px;
+    }
+
+    .site-footer .brand-mark {
+        height: 74px;
+        width: 74px;
     }
 
     .brand-copy small {
@@ -1919,6 +1946,11 @@ p {
     }
 
     .reveal {
+        opacity: 1;
+        transform: none;
+    }
+
+    .section-animate {
         opacity: 1;
         transform: none;
     }

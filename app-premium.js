@@ -4,11 +4,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const mobileMenu = document.getElementById("mobile-menu");
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("main section[id]");
+    const animatedSections = document.querySelectorAll(".section-animate");
     const serviceTabs = document.querySelectorAll(".service-tab");
     const servicePanels = document.querySelectorAll(".service-detail");
     const contactForm = document.getElementById("contact-form");
     const formStatus = document.getElementById("form-status");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const sectionDirections = [
+        "translateX(-96px)",
+        "translateY(72px)",
+        "translateX(96px)",
+        "translateY(72px)"
+    ];
+    const revealDirections = [
+        "translateX(-72px)",
+        "translateY(56px)",
+        "translateX(72px)",
+        "translateY(-40px)"
+    ];
 
     const closeMenu = () => {
         menuToggle.classList.remove("open");
@@ -68,9 +81,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const revealItems = document.querySelectorAll(".reveal");
+    animatedSections.forEach((section, sectionIndex) => {
+        if (!section.classList.contains("is-visible")) {
+            section.style.setProperty("--section-delay", `${Math.min(sectionIndex, 4) * 45}ms`);
+        }
+        section.style.setProperty("--section-transform", sectionDirections[sectionIndex % sectionDirections.length]);
+
+        section.querySelectorAll(".reveal").forEach((item, itemIndex) => {
+            item.style.setProperty("--reveal-delay", `${120 + (itemIndex * 70)}ms`);
+            item.style.setProperty("--reveal-transform", revealDirections[itemIndex % revealDirections.length]);
+        });
+    });
+
     if (reducedMotion || !("IntersectionObserver" in window)) {
+        animatedSections.forEach((section) => section.classList.add("is-visible"));
         revealItems.forEach((item) => item.classList.add("visible"));
     } else {
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.18,
+            rootMargin: "0px 0px -60px"
+        });
+
         const revealObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -83,6 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
             rootMargin: "0px 0px -45px"
         });
 
+        animatedSections.forEach((section) => {
+            if (!section.classList.contains("is-visible")) {
+                sectionObserver.observe(section);
+            }
+        });
         revealItems.forEach((item) => revealObserver.observe(item));
     }
 
