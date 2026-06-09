@@ -19,6 +19,9 @@
 </head>
 
 <body>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-ring" id="cursor-ring"></div>
+
     <a class="skip-link" href="#main-content">Skip to content</a>
 
     <header class="site-header" id="site-header">
@@ -118,89 +121,95 @@
             </div>
         </section>
 
-        <section class="intro section section-animate" id="about">
+        <section class="intro section section-animate premium-intro" id="about">
+            <div class="intro-glow-bg"></div>
             <div class="shell">
-                <div class="about-reference reveal">
-                    <div class="about-reference-grid" aria-hidden="true"></div>
-
-                    <article class="about-reference-copy">
-                        <div class="eyebrow"><span></span> About ESTN</div>
-                        <p class="about-reference-kicker">Asset integrity leadership for complex industrial systems</p>
-                        <h2>Engineering<br>clarity for<br>high-stakes<br>operations<span>.</span></h2>
-                        <p class="about-reference-lead">We combine field experience, engineering judgement, and risk-led
+                <div class="about-premium-layout reveal">
+                    <div class="about-premium-copy">
+                        <div class="eyebrow eyebrow-premium"><span></span> About ESTN</div>
+                        <p class="about-premium-kicker">Asset integrity leadership for complex industrial systems</p>
+                        <h2 style="text-wrap: balance;">Engineering clarity for high-stakes operations<span
+                                class="dot-accent">.</span></h2>
+                        <p class="about-premium-lead">We combine field experience, engineering judgement, and risk-led
                             methodologies to protect assets where failure is not an option.</p>
-                        <div class="about-reference-actions">
-                            <a class="button button-teal" href="#contact">
+                        <div class="about-premium-actions">
+                            <a class="button button-teal-glow" href="#contact">
                                 Talk to our engineers <i class="fa-solid fa-arrow-right"></i>
                             </a>
                             <p><i class="fa-solid fa-shield-halved"></i> Built around the realities of your operation,
                                 not generic reports.</p>
                         </div>
-                    </article>
+                    </div>
 
-                    <div class="about-reference-visual">
-                        <div class="about-reference-image" role="img"
+                    <div class="about-premium-visual">
+                        <div class="about-visual-image" role="img"
                             aria-label="Engineers overlooking an industrial processing facility at dusk"></div>
-                        <div class="about-technical-panel" aria-hidden="true">
-                            <span></span><span></span><span></span><span></span>
+                        <div class="about-visual-overlay"></div>
+
+                        <article class="about-float-card card-risk float-anim-1">
+                            <div class="card-glass">
+                                <i class="fa-solid fa-crosshairs"></i>
+                                <div>
+                                    <strong>Risk-led practice</strong>
+                                    <p>Decisions informed by risk, data and consequence.</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="about-float-card card-reliability float-anim-2">
+                            <div class="card-glass">
+                                <i class="fa-solid fa-chart-column"></i>
+                                <div>
+                                    <strong>Reliability focus</strong>
+                                    <p>Maximising uptime through integrity and foresight.</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="about-float-card card-field float-anim-3">
+                            <div class="card-glass">
+                                <i class="fa-solid fa-brain"></i>
+                                <div>
+                                    <strong>Field intelligence</strong>
+                                    <p>Insights from the field that drive outcomes.</p>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="about-float-card card-sectors float-anim-4">
+                            <div class="card-glass">
+                                <i class="fa-solid fa-droplet"></i>
+                                <div>
+                                    <strong>Oil, gas, power,<br>mining &amp; metals</strong>
+                                    <p>Sector expertise. Complex environments. Better decisions.</p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="about-premium-proof">
+                    <article class="proof-card hover-lift">
+                        <div class="proof-icon-glow"><i class="fa-solid fa-helmet-safety"></i></div>
+                        <div class="proof-content">
+                            <h3>Field-tested thinking</h3>
+                            <span class="proof-line"></span>
+                            <p>Advice shaped by the operating realities of complex industrial assets.</p>
                         </div>
-
-                        <article class="about-float-card about-float-risk">
-                            <i class="fa-solid fa-crosshairs"></i>
-                            <div>
-                                <strong>Risk-led practice</strong>
-                                <p>Decisions informed by risk, data and consequence.</p>
-                            </div>
-                        </article>
-                        <article class="about-float-card about-float-reliability">
-                            <i class="fa-solid fa-chart-column"></i>
-                            <div>
-                                <strong>Reliability focus</strong>
-                                <p>Maximising uptime through integrity and foresight.</p>
-                            </div>
-                        </article>
-                        <article class="about-float-card about-float-field">
-                            <i class="fa-solid fa-brain"></i>
-                            <div>
-                                <strong>Field intelligence</strong>
-                                <p>Insights from the field that drive outcomes.</p>
-                            </div>
-                        </article>
-                        <article class="about-float-card about-float-sectors">
-                            <i class="fa-solid fa-droplet"></i>
-                            <div>
-                                <strong>Oil, gas, power,<br>mining &amp; metals</strong>
-                                <p>Sector expertise. Complex environments. Better decisions.</p>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="about-reference-proof">
-                        <article>
-                            <span class="about-proof-icon"><i class="fa-solid fa-helmet-safety"></i></span>
-                            <div>
-                                <h3>Field-tested thinking</h3>
-                                <span class="about-proof-line"></span>
-                                <p>Advice shaped by the operating realities of complex industrial assets.</p>
-                            </div>
-                        </article>
-                        <article>
-                            <span class="about-proof-icon"><i class="fa-solid fa-shield-halved"></i></span>
-                            <div>
-                                <h3>Risk-first delivery</h3>
-                                <span class="about-proof-line"></span>
-                                <p>Integrity decisions prioritised around safety, continuity, and compliance.</p>
-                            </div>
-                        </article>
-                        <article>
-                            <span class="about-proof-icon"><i class="fa-regular fa-user"></i></span>
-                            <div>
-                                <h3>Engineering judgement</h3>
-                                <span class="about-proof-line"></span>
-                                <p>Practical, experience-led judgement applied to complex problems.</p>
-                            </div>
-                        </article>
-                    </div>
+                    </article>
+                    <article class="proof-card hover-lift">
+                        <div class="proof-icon-glow"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="proof-content">
+                            <h3>Risk-first delivery</h3>
+                            <span class="proof-line"></span>
+                            <p>Integrity decisions prioritised around safety, continuity, and compliance.</p>
+                        </div>
+                    </article>
+                    <article class="proof-card hover-lift">
+                        <div class="proof-icon-glow"><i class="fa-regular fa-user"></i></div>
+                        <div class="proof-content">
+                            <h3>Engineering judgement</h3>
+                            <span class="proof-line"></span>
+                            <p>Practical, experience-led judgement applied to complex problems.</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>

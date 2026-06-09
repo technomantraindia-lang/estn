@@ -180,5 +180,57 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3500);
     });
 
+    // Global custom cursor
+    const cursorDot = document.getElementById("cursor-dot");
+    const cursorRing = document.getElementById("cursor-ring");
+    
+    if (cursorDot && cursorRing && supportsHover && !reducedMotion) {
+        let mouseX = -100;
+        let mouseY = -100;
+        let ringX = -100;
+        let ringY = -100;
+        let isCursorActive = false;
+
+        document.documentElement.addEventListener("mousemove", (e) => {
+            if (!isCursorActive) {
+                isCursorActive = true;
+                document.body.classList.add("cursor-active");
+                ringX = e.clientX;
+                ringY = e.clientY;
+            }
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        document.documentElement.addEventListener("mouseleave", () => {
+            isCursorActive = false;
+            document.body.classList.remove("cursor-active");
+        });
+
+        const updateCursor = () => {
+            if (isCursorActive) {
+                // Dot follows exactly
+                cursorDot.style.left = `${mouseX}px`;
+                cursorDot.style.top = `${mouseY}px`;
+
+                // Ring follows with easing (lerp)
+                ringX += (mouseX - ringX) * 0.2;
+                ringY += (mouseY - ringY) * 0.2;
+                
+                cursorRing.style.left = `${ringX}px`;
+                cursorRing.style.top = `${ringY}px`;
+            }
+            requestAnimationFrame(updateCursor);
+        };
+        requestAnimationFrame(updateCursor);
+
+        // Add hover effect for interactive elements
+        const interactables = document.querySelectorAll("a, button, input, textarea, select, .proof-card, .card-glass, .service-tab");
+        interactables.forEach(el => {
+            el.addEventListener("mouseenter", () => cursorRing.classList.add("hover"));
+            el.addEventListener("mouseleave", () => cursorRing.classList.remove("hover"));
+        });
+    }
+
     document.getElementById("current-year").textContent = new Date().getFullYear();
 });
